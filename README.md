@@ -2,7 +2,7 @@
 This is a theme for KDE Plasma 6 made for [this video](https://youtu.be/prG9xFkvlNg).
 
 ## How to Install
-Follow the instructions, then apply the new theme from the system settings.
+Follow the instructions, then apply the new theme from the system settings, either inside `Appearance` or `Window Management` category.
 
 ### Font
 1. Install: https://www.jetbrains.com/lp/mono/
@@ -31,12 +31,37 @@ Follow the instructions, then apply the new theme from the system settings.
 1. Install Kvantum: https://store.kde.org/p/1005410
 2. Download File: NoMansSkyJux.tar.gz (It's a modified version of [No Man's Sky Kvantum Theme](https://www.pling.com/p/1398154))
 3. Extract inside this folder: `~/.config/Kvantum/`
+4. Open Kvantum Manager, and select the theme from the list of existing themes in `Change/Delete Theme` tab.
 
 ### Dynamic Tiling
 1. Install: https://github.com/esjeon/krohnkite
+2. Enable it from System Settings -> Window Management -> KWin Scripts
 
 ### Window Blurring with Better Blur
 1. Install: https://github.com/taj-ny/kwin-effects-forceblur
+2. Enable it from System Settings -> Window Management -> Desktop Effects
+3. Here's a list of apps I added to the classes inside Better Blur configs:
+```
+dolphin
+systemsettings
+zen
+app.zen_browser.zen
+plasmashell
+konsole
+kvantummanager
+org.kde.spectacle
+discord
+org.inkscape.Inkscape
+Yad
+kate
+org.kde.plasma-systemmonitor
+org.kde.ark
+org.kde.discover
+org.kde.haruna
+rofi
+spotify
+steam
+```
 
 ### Stickers
 1. Go to Panel Configuration
