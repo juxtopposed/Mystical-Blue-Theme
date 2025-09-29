@@ -1,0 +1,62 @@
+entry {
+    placeholder: "";
+    text-color: #dddddd;
+    padding: 8px 0 8px 8px;
+}
+
+configuration {
+    font: "JetBrainsMono Nerd Font Mono 12";
+    lines: 10;
+    fixed-num-lines: true;
+    padding: 10px;
+}
+
+inputbar {
+    children: [entry];
+}
+
+* {
+    separatorcolor: transparent;
+    selected-normal-background: rgba(255,255,255, 5%);
+    normal-background: rgba(255,255,255, 0%);
+    alternate-normal-background: rgba(255,255,255, 0%);
+}
+
+mainbox {
+    border: 2px;
+    border-color: rgba(255,255,255, 20%);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+window {
+    border-radius: 11px;
+    border: 1px solid;
+    border-color: #000000;
+    background-color: rgba(38,43,52,85%);
+    padding: 0px;
+    width: 30%;
+}
+
+
+listview {
+    lines: 10;
+}
+
+element {
+    padding: 10px 10px;
+    height: 50px;
+    border-radius: 5px;
+    children: [ element-text, element-icon ];
+}
+
+element-text {
+    text-color: #e1e1e1;
+}
+
+#scrollbar {
+    handle-color: #3a3f4a;
+    handle-width: 4px ;
+    padding: 0;
+}
+
