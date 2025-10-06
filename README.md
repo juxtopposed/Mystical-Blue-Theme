@@ -35,7 +35,7 @@ Follow the instructions, then apply the new theme from the system settings, eith
 
 ### Transparent Panel with Progressive Blur
 1. Download the widget 'Panel Colorizer' from the KDE store.
-2. Completely remove the background using the widget.
+2. Completely remove the background using the widget. Appearance tab -> Native Panel option -> Uncheck "Background"
 3. Create your own wallpaper with a progressive blur using this ready-made template: https://www.figma.com/community/file/1557150689681634487/wallpaper-template-for-kde-theme
 4. All you have to do is replace the image with your own.
 5. Now, applying the wallpaper will imitate a progressive blur on the panel.
