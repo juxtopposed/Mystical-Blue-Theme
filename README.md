@@ -33,6 +33,13 @@ Follow the instructions, then apply the new theme from the system settings, eith
 3. Extract inside this folder: `~/.config/Kvantum/`
 4. Open Kvantum Manager, and select the theme from the list of existing themes in `Change/Delete Theme` tab.
 
+### Transparent Panel with Progressive Blur
+1. Download the widget 'Panel Colorizer' from the KDE store.
+2. Completely remove the background using the widget.
+3. Create your own wallpaper with a progressive blur using this ready-made template: https://www.figma.com/community/file/1557150689681634487/wallpaper-template-for-kde-theme
+4. All you have to do is replace the image with your own.
+5. Now, applying the wallpaper will imitate a progressive blur on the panel.
+
 ### Dynamic Tiling
 1. Install: https://github.com/esjeon/krohnkite
 2. Enable it from System Settings -> Window Management -> KWin Scripts
