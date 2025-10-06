@@ -28,7 +28,7 @@ Follow the instructions, then apply the new theme from the system settings, eith
 3. Put it in this folder: `~/.config/rofi/`
 
 ### Kvantum
-1. Install Kvantum: https://store.kde.org/p/1005410
+1. Install Kvantum: https://store.kde.org/p/2201676
 2. Download File: NoMansSkyJux.tar.gz (It's a modified version of [No Man's Sky Kvantum Theme](https://www.pling.com/p/1398154))
 3. Extract inside this folder: `~/.config/Kvantum/`
 4. Open Kvantum Manager, and select the theme from the list of existing themes in `Change/Delete Theme` tab.
