@@ -41,7 +41,7 @@ Follow the instructions, then apply the new theme from the system settings, eith
 5. Now, applying the wallpaper will imitate a progressive blur on the panel.
 
 ### Dynamic Tiling
-1. Install: https://github.com/esjeon/krohnkite
+1. Install: https://github.com/anametologin/krohnkite
 2. Enable it from System Settings -> Window Management -> KWin Scripts
 
 ### Window Blurring with Better Blur
