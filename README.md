@@ -5,7 +5,7 @@ This is a theme for KDE Plasma 6 made for [this video](https://youtu.be/prG9xFkv
 Follow the instructions, then apply the new theme from the system settings, either inside `Appearance` or `Window Management` category.
 
 ### Font
-1. Install: https://www.jetbrains.com/lp/mono/
+1. Install: https://www.nerdfonts.com/font-downloads
 
 ### Colors
 1. Download File: JuxTheme.colors
