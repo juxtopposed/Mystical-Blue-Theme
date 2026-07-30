@@ -12,6 +12,8 @@ ROFI_DIR="$HOME/.config/rofi"
 ROFI_IMG_DIR="$HOME/.local/share/jux-rofi-images"
 FONT_DIR="$HOME/.local/share/fonts"
 
+trap 'rm -rf "${TMP_FONT:-}" "${TMP_DIR:-}"' EXIT
+
 mkdir -p "$COLOR_DIR" "$AURORAE_DIR" "$PLASMA_DIR" "$KVANTUM_DIR" "$ROFI_DIR" "$ROFI_IMG_DIR" "$FONT_DIR"
 
 install_if_missing() {
@@ -20,8 +22,15 @@ install_if_missing() {
     local pkgs="$@"
     if ! command -v "$bin" >/dev/null 2>&1; then
         echo "[*] Installing missing dependency: $pkgs"
-        sudo apt update
-        sudo apt install -y $pkgs
+        if command -v pacman > /dev/null 2>&1; then
+            sudo pacman -S --needed --noconfirm $pkgs
+        elif command -v apt >/dev/null 2>&1; then
+            sudo apt update && sudo apt install -y $pkgs
+        elif command -v dnf >/dev/null 2>&1; then
+            sudo dnf install -y $pkgs
+        else
+            echo "[!] Warning: Package manager not recognized. Please install $bin manually"
+        fi
     else
         echo "[=] Found dependency: $bin"
     fi
@@ -29,7 +38,7 @@ install_if_missing() {
 
 install_if_missing git git
 install_if_missing cmake cmake
-install_if_missing make build-essential
+install_if_missing make base-devel
 install_if_missing unzip unzip
 install_if_missing wget wget
 
@@ -44,8 +53,10 @@ fi
 
 cp "$BASE_DIR/rofi/config.rasi" "$ROFI_DIR/"
 echo "[+] Installed Rofi config"
-cp -r "$BASE_DIR/images/"* "$ROFI_IMG_DIR/" 2>/dev/null || true
-echo "[+] Installed Rofi images"
+if [ -d "$BASE_DIR/images" ] && [ "$(ls -A "$BASE_DIR/images")" ]; then
+    cp -r "$BASE_DIR/images/." "$ROFI_IMG_DIR/"
+    echo "[+] Installed Rofi images"
+fi
 
 echo "[*] Checking JetBrainsMono fonts..."
 FONT_COUNT=$(fc-list | grep -i "JetBrainsMono" | wc -l)
@@ -70,34 +81,33 @@ else
 fi
 
 PLASMA_VERSION=$(plasmashell --version 2>/dev/null | grep -o '[0-9]\+' | head -1 || echo 0)
-if [ "$PLASMA_VERSION" -ge 6 ]; then
-    echo "[=] Detected Plasma $PLASMA_VERSION → using Bismuth (tiling)"
-    TILING="bismuth"
-else
-    echo "[=] Detected Plasma $PLASMA_VERSION → using Krohnkite (tiling)"
-    TILING="krohnkite"
-fi
+echo "[=] Detected Plasma $PLASMA_VERSION → using Krohnkite (tiling)"
+TILING="krohnkite"
 
-read -p "Do you want to install the tiling extension ($TILING)? (y/N): " RESP
+RESP="n"
+if [ -t 0 ]; then
+    read -p "Do you want to install the tiling extension ($TILING)? (y/N): " RESP
+fi
 if [[ "$RESP" =~ ^[Yy]$ ]]; then
     TMP_DIR=$(mktemp -d)
-    if [ "$TILING" = "krohnkite" ]; then
-        echo "[*] Installing Krohnkite..."
-        git clone https://github.com/esjeon/krohnkite.git "$TMP_DIR/krohnkite"
-        PLASMAPKG=$(command -v plasmapkg2 || command -v plasmapkg || command -v kpackagetool6 || true)
-        if [ -n "$PLASMAPKG" ]; then
-            "$PLASMAPKG" --type=KWin/Script -i "$TMP_DIR/krohnkite"
-        else
-            echo "[!] Could not find plasmapkg tool, skipping Krohnkite"
-        fi
+    echo "[*] Installing Krohnkite..."
+    git clone https://github.com/esjeon/krohnkite.git "$TMP_DIR/krohnkite"
+    PLASMAPKG=$(command -v kpackagetool6 || command -v plasmapkg2 || command -v plasmapkg || true)
+    if [ -n "$PLASMAPKG" ]; then
+        "$PLASMAPKG" --type=KWin/Script -u "$TMP_DIR/krohnkite" 2>/dev/null || \
+        "$PLASMAPKG" --type=KWin/Script -i "$TMP_DIR/krohnkite"
     else
-        echo "[*] Installing Bismuth..."
-        git clone https://github.com/Bismuth-Forge/bismuth.git "$TMP_DIR/bismuth"
-        kpackagetool6 --type=KWin/Script -i "$TMP_DIR/bismuth" || echo "[!] Failed to install Bismuth"
+        echo "[!] Could not find plasmapkg tool, skipping Krohnkite"
     fi
 fi
 
-install_if_missing kvantummanager "qt-style-kvantum qt-style-kvantum-themes"
+if command -v pacman >/dev/null 2>&1; then
+    install_if_missing kvantummanager "kvantum"
+elif command -v apt >/dev/null 2>&1; then
+    install_if_missing kvantummanager "qt-style-kvantum qt-style-kvantum-themes"
+else
+    install_if_missing kvantummanager "kvantum"
+fi
 
 echo ""
 echo "======================================="
