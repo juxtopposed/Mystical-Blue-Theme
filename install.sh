@@ -52,14 +52,14 @@ FONT_COUNT=$(fc-list | grep -i "JetBrainsMono" | wc -l)
 
 if [ "$FONT_COUNT" -lt 20 ]; then
     echo "[!] JetBrainsMono incomplete ($FONT_COUNT fonts found). Installing full set..."
-    LOCAL_FONT_DIR=$(find "$BASE_DIR" -maxdepth 2 -type d -name "JetBrainsMono-*")
+    LOCAL_FONT_DIR=$(find "$BASE_DIR" -maxdepth 2 -type d -name "JetBrainsMono*")
     if [ -n "$LOCAL_FONT_DIR" ]; then
         echo "[*] Installing from local: $LOCAL_FONT_DIR"
         find "$LOCAL_FONT_DIR" -type f -name "*.ttf" -exec cp {} "$FONT_DIR/" \;
     else
         echo "[*] Downloading JetBrainsMono from JetBrains..."
         TMP_FONT=$(mktemp -d)
-        wget -qO "$TMP_FONT/JetBrainsMono.zip" "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+        wget -qO "$TMP_FONT/JetBrainsMono.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
         unzip -qq "$TMP_FONT/JetBrainsMono.zip" -d "$TMP_FONT"
         find "$TMP_FONT" -type f -name "*.ttf" -exec cp {} "$FONT_DIR/" \;
     fi
